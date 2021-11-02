@@ -1,36 +1,35 @@
-import React from 'react';
-import { View, StyleSheet, Text, Image, Button } from 'react-native';
 
-export default function StartScreen({ navigation }) {
+import React from 'react';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
+
+const App = () => {
+
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Welcome to Explore</Text>
-      <Image
-        style={styles.image}
-        source={require('../../assets/images/start.gif')}
-      />
-      <Button
-        title="Next"
-        backgroundColor="#000"
-        onPress={() => navigation.navigate('Continents')}
-      />
+      <Text style={{ fontSize: 55, fontWeight: '100' }}> Welcome to     </Text>
+      <Text style={styles.welcome}> Explore    </Text>
+      <Image source={require('../../assets/images/start.gif')} style={{ resizeMode: 'contain', width: 350 }} />
+      <Button title="Let's go"
+        color='#000000'
+        backgroundcolor='#000000'
+        on Press={() => NavigationContainer.navigate('Continents')} />
     </View>
+
+
   );
-}
+
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'flex-end'
   },
-  header: {
-    fontSize: 75,
-    fontWeight: '100',
-    textAlign: 'right',
+
+  welcome: {
+    fontSize: 55,
   },
-  image: {
-    marginTop: -50,
-  },
-});
+
+})
+export default App;
