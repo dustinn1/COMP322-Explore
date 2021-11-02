@@ -1,28 +1,35 @@
+
 import React from 'react';
-import { StatusBar, useColorScheme } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import WelcomeScreen from './screens/start/welcome';
-import ContinentsScreen from './screens/start/continents';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
-const Stack = createNativeStackNavigator();
-
-export default function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+const App = () => {
 
   return (
-    <>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome">
-          <Stack.Screen
-            name="Welcome"
-            component={WelcomeScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="Continents" component={ContinentsScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </>
+    <View style={styles.container}>
+      <Text style={{ fontSize: 55, fontWeight: '100' }}> Welcome to     </Text>
+      <Text style={styles.welcome}> Explore    </Text>
+      <Image source={require('../../assets/images/start.gif')} style={{ resizeMode: 'contain', width: 350 }} />
+      <Button title="Let's go"
+        color='#000000'
+        backgroundcolor='#000000'
+        on Press={() => NavigationContainer.navigate('Continents')} />
+    </View>
+
+
   );
-}
+
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-end'
+  },
+
+  welcome: {
+    fontSize: 55,
+  },
+
+})
+export default App;
