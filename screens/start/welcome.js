@@ -1,24 +1,24 @@
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import SharedButton from '../../shared/SharedButton';
 
-import React from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+export default class App extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={{ fontSize: 55, fontWeight: '100' }}> Welcome to     </Text>
+        <Text style={styles.welcome}> Explore    </Text>
+        <Image source={require('../../assets/images/start.gif')} style={{ resizeMode: 'contain', width: 350 }} />
 
-const App = () => {
+        <SharedButton text='Get Started' onPress={() => NavigationContainer.navigate('Continents')} />
 
-  return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 55, fontWeight: '100' }}> Welcome to     </Text>
-      <Text style={styles.welcome}> Explore    </Text>
-      <Image source={require('../../assets/images/start.gif')} style={{ resizeMode: 'contain', width: 350 }} />
-      <Button title="Let's go"
-        color='#000000'
-        backgroundcolor='#000000'
-        on Press={() => NavigationContainer.navigate('Continents')} />
-    </View>
+      </View>
 
+    );
+  }
 
-  );
+}
 
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -32,4 +32,3 @@ const styles = StyleSheet.create({
   },
 
 })
-export default App;
