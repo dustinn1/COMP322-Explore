@@ -1,34 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import SharedButton from '../../shared/SharedButton';
+import CustomButton from '../../components/CustomButton';
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={{ fontSize: 55, fontWeight: '100' }}> Welcome to     </Text>
-        <Text style={styles.welcome}> Explore    </Text>
-        <Image source={require('../../assets/images/start.gif')} style={{ resizeMode: 'contain', width: 350 }} />
-
-        <SharedButton text='Get Started' onPress={() => NavigationContainer.navigate('Continents')} />
-
-      </View>
-
-    );
-  }
-
+export default function App({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>
+        Welcome to <Text style={styles.bottomHeader}>Explore</Text>
+      </Text>
+      <Image
+        source={require('../../assets/images/start/welcome.gif')}
+        style={styles.image}
+      />
+      <CustomButton
+        text="Get Started"
+        onPress={() => navigation.navigate('Continents')}
+      />
+    </View>
+  );
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'flex-end'
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
-
-  welcome: {
+  header: {
     fontSize: 55,
+    textAlign: 'right',
   },
-
-})
+  bottomHeader: {
+    fontWeight: '100',
+  },
+  image: {
+    resizeMode: 'contain',
+    width: '100%',
+  },
+});

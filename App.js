@@ -20,7 +20,11 @@ export default function App() {
             component={WelcomeScreen}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="Continents" component={ContinentsScreen} />
+          <Stack.Screen
+            name="Continents"
+            component={ContinentsScreen}
+            options={{ title: 'Select a Continent' }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
