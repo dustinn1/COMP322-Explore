@@ -8,22 +8,26 @@ const data = [
     id: 1,
     title: 'Asia',
     image: require('../../assets/images/start/asia.png'),
+    loc:"asianContinent"
   },
   {
     id: 2,
     title: 'Africa',
     image: require('../../assets/images/start/africa.png'),
+    loc:"africanContinent"
   },
   {
     id: 3,
     title: 'Australia',
     image: require('../../assets/images/start/africa.png'),
+    loc:"australianContinent"
   },
   {
     id: 4,
     title: 'Europe',
     image: require('../../assets/images/start/africa.png'),
-  },
+    loc:"europeanContinent"
+  }/*,
   {
     id: 5,
     title: 'North America',
@@ -33,10 +37,10 @@ const data = [
     id: 6,
     title: 'South America',
     image: require('../../assets/images/start/southamerica.png'),
-  },
+  },*/
 ];
 
-export default function ContinentsScreen() {
+export default function ContinentsScreen({navigation}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const ref = useRef(null);
 
@@ -45,6 +49,7 @@ export default function ContinentsScreen() {
       <View key={item.id} style={styles.item}>
         <Text style={styles.itemTitle}>{item.title}</Text>
         <Image source={item.image} style={styles.itemImage} />
+        <CustomButton text="Select" onPress={() => navigation.navigate(item.loc)} />
       </View>
     );
   };
@@ -70,7 +75,7 @@ export default function ContinentsScreen() {
         carouselRef={ref}
         tappableDots={true}
       />
-      <CustomButton text="Select" onPress={() => console.log(activeIndex)} />
+      
     </View>
   );
 }
