@@ -14,7 +14,7 @@ export default function App({ navigation }) {
       />
       <CustomButton
         text="Get Started"
-        onPress={() => navigation.navigate('Continents')}
+        onPress={() => navigation.navigate('ContinentsSelect')}
       />
     </View>
   );

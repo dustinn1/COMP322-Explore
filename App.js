@@ -4,11 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomeScreen from './screens/start/welcome';
 import ContinentsScreen from './screens/start/continents';
-import asianContinent from './screens/start/asianContinent';
-import africanContinent from './screens/start/africanContinent';
-import australianContinent from './screens/start/australianContinent';
-import europeanContinent from './screens/start/europeanContinent';
-
+import ContinentScreen from './screens/start/continent';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,25 +22,14 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="Continents"
+            name="ContinentsSelect"
             component={ContinentsScreen}
             options={{ title: 'Select a Continent' }}
           />
           <Stack.Screen
-            name="asianContinent"
-            component={asianContinent}
-          />
-          <Stack.Screen
-            name="africanContinent"
-            component={africanContinent}
-          />
-          <Stack.Screen
-            name="australianContinent"
-            component={australianContinent}
-          />
-          <Stack.Screen
-            name="europeanContinent"
-            component={europeanContinent}
+            name="Continent"
+            component={ContinentScreen}
+            options={({ route }) => ({ title: route.params.name })}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -114,7 +114,6 @@
 				5A60A11BB50830BC76E9766A /* Pods-project-projectTests.debug.xcconfig */,
 				8FA2B676563AEEE1E2D09707 /* Pods-project-projectTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

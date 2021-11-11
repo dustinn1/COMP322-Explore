@@ -8,26 +8,26 @@ const data = [
     id: 1,
     title: 'Asia',
     image: require('../../assets/images/start/asia.png'),
-    loc:"asianContinent"
+    loc: 'asianContinent',
   },
   {
     id: 2,
     title: 'Africa',
     image: require('../../assets/images/start/africa.png'),
-    loc:"africanContinent"
+    loc: 'africanContinent',
   },
   {
     id: 3,
     title: 'Australia',
     image: require('../../assets/images/start/africa.png'),
-    loc:"australianContinent"
+    loc: 'australianContinent',
   },
   {
     id: 4,
     title: 'Europe',
     image: require('../../assets/images/start/africa.png'),
-    loc:"europeanContinent"
-  }/*,
+    loc: 'europeanContinent',
+  },
   {
     id: 5,
     title: 'North America',
@@ -37,10 +37,10 @@ const data = [
     id: 6,
     title: 'South America',
     image: require('../../assets/images/start/southamerica.png'),
-  },*/
+  },
 ];
 
-export default function ContinentsScreen({navigation}) {
+export default function ContinentsScreen({ navigation }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const ref = useRef(null);
 
@@ -49,7 +49,6 @@ export default function ContinentsScreen({navigation}) {
       <View key={item.id} style={styles.item}>
         <Text style={styles.itemTitle}>{item.title}</Text>
         <Image source={item.image} style={styles.itemImage} />
-        <CustomButton text="Select" onPress={() => navigation.navigate(item.loc)} />
       </View>
     );
   };
@@ -58,7 +57,6 @@ export default function ContinentsScreen({navigation}) {
     <View style={styles.container}>
       <Text style={styles.header}>Where would you like to go?</Text>
       <Carousel
-        style={styles.carousel}
         ref={ref}
         data={data}
         renderItem={renderItem}
@@ -75,7 +73,14 @@ export default function ContinentsScreen({navigation}) {
         carouselRef={ref}
         tappableDots={true}
       />
-      
+      <CustomButton
+        text="Select"
+        onPress={() =>
+          navigation.navigate('Continent', {
+            name: data[activeIndex].title,
+          })
+        }
+      />
     </View>
   );
 }
