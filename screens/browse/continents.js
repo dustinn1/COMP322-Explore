@@ -18,7 +18,7 @@ const data = [
   },
   {
     id: 3,
-    title: 'Australia',
+    title: 'Oceania',
     image: require('../../assets/images/start/africa.png'),
     loc: 'australianContinent',
   },
@@ -76,7 +76,7 @@ export default function ContinentsScreen({ navigation }) {
       <CustomButton
         text="Select"
         onPress={() =>
-          navigation.navigate('Continent', {
+          navigation.navigate('CountriesSelect', {
             name: data[activeIndex].title,
           })
         }

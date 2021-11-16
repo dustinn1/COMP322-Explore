@@ -1,12 +1,16 @@
 import React from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import WelcomeScreen from './screens/start/welcome';
-import ContinentsScreen from './screens/start/continents';
-import ContinentScreen from './screens/start/continent';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import BrowseScreen from './screens/browse';
+import SavedScreen from './screens/saved';
+import HistoryScreen from './screens/history';
+import SettingsScreen from './screens/settings';
 
-const Stack = createNativeStackNavigator();
+MaterialIcons.loadFont();
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -15,23 +19,49 @@ export default function App() {
     <>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome">
-          <Stack.Screen
-            name="Welcome"
-            component={WelcomeScreen}
-            options={{ headerShown: false }}
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Browse"
+            component={BrowseScreen}
+            options={{
+              headerShown: false,
+              tabBarLabel: 'Browse',
+              tabBarIcon: ({ color, size }) => (
+                <MaterialIcons name="search" color={color} size={size} />
+              ),
+            }}
           />
-          <Stack.Screen
-            name="ContinentsSelect"
-            component={ContinentsScreen}
-            options={{ title: 'Select a Continent' }}
+          <Tab.Screen
+            name="Saved"
+            component={SavedScreen}
+            options={{
+              tabBarLabel: 'Saved',
+              tabBarIcon: ({ color, size }) => (
+                <MaterialIcons name="favorite" color={color} size={size} />
+              ),
+            }}
           />
-          <Stack.Screen
-            name="Continent"
-            component={ContinentScreen}
-            options={({ route }) => ({ title: route.params.name })}
+          <Tab.Screen
+            name="History"
+            component={HistoryScreen}
+            options={{
+              tabBarLabel: 'History',
+              tabBarIcon: ({ color, size }) => (
+                <MaterialIcons name="history" color={color} size={size} />
+              ),
+            }}
           />
-        </Stack.Navigator>
+          <Tab.Screen
+            name="Settings"
+            component={SettingsScreen}
+            options={{
+              tabBarLabel: 'Settings',
+              tabBarIcon: ({ color, size }) => (
+                <MaterialIcons name="settings" color={color} size={size} />
+              ),
+            }}
+          />
+        </Tab.Navigator>
       </NavigationContainer>
     </>
   );
