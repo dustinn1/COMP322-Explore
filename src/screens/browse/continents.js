@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     paddingBottom: 50,
   },
   header: {
-    fontSize: 35,
+    fontSize: 30,
     marginTop: 50,
     fontWeight: '100',
   },
@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontSize: 30,
     fontWeight: '200',
-    marginBottom: -50,
     textDecorationLine: 'underline',
   },
   itemImage: {

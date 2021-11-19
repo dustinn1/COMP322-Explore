@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import CustomButton from '../../components/CustomButton';
+import CustomButton from '../components/CustomButton';
+import { storeKey } from '../utils/AsyncStorage';
 
 export default function App({ navigation }) {
   return (
@@ -9,12 +10,15 @@ export default function App({ navigation }) {
         Welcome to <Text style={styles.bottomHeader}>Explore</Text>
       </Text>
       <Image
-        source={require('../../assets/images/start/welcome.gif')}
+        source={require('../assets/images/start/welcome.gif')}
         style={styles.image}
       />
       <CustomButton
         text="Get Started"
-        onPress={() => navigation.navigate('ContinentsSelect')}
+        onPress={() => {
+          navigation.navigate('ContinentsSelect');
+          storeKey('welcome', 'true');
+        }}
       />
     </View>
   );

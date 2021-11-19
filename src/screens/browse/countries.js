@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import countries from '../../data/countries.json';
 
-export default function Continent({ route }) {
+export default function Continent({ route, navigation }) {
   const { name } = route.params;
 
   const renderItem = ({ item }) => (

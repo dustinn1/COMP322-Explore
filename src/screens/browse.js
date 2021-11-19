@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { getKey } from '../utils/AsyncStorage';
+import WelcomeScreen from '../screens/welcome';
 import ContinentsScreen from '../screens/browse/continents';
 import CountriesScreen from '../screens/browse/countries';
+import CountryScreen from '../screens/browse/country';
 
 const Stack = createNativeStackNavigator();
 
-export default function Home() {
+export default function Home({ navigation }) {
+  useEffect(() => {
+    getKey('welcome')
+      .then(value => {
+        if (value !== 'true') {
+          navigation.navigate('Welcome');
+          console.log('running');
+        }
+      })
+      .catch(err => console.log(err));
+  }, [navigation]);
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -17,6 +31,20 @@ export default function Home() {
         name="CountriesSelect"
         component={CountriesScreen}
         options={({ route }) => ({ title: route.params.name })}
+      />
+      <Stack.Screen
+        name="Country"
+        component={CountryScreen}
+        options={({ route }) => ({ title: route.params.name })}
+      />
+      <Stack.Screen
+        name="Welcome"
+        component={WelcomeScreen}
+        options={{
+          presentation: 'modal',
+          headerShown: false,
+          gestureEnabled: false,
+        }}
       />
     </Stack.Navigator>
   );

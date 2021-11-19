@@ -1,10 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { getAllKeys, clearAllKeys } from '../utils/AsyncStorage';
 
 export default function Settings() {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Settings</Text>
+      <Text>Async Storage Test</Text>
+      <Button title="All Keys" onPress={getAllKeys} />
+      <Button title="Clear Keys" onPress={clearAllKeys} />
     </View>
   );
 }
