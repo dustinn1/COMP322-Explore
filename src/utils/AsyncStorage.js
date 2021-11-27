@@ -1,5 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+/**
+ * Stores a key-value pair
+ * @param {string} key
+ * @param {string} value
+ */
 export const storeKey = async (key, value) => {
   try {
     await AsyncStorage.setItem(key, value);
@@ -8,6 +13,11 @@ export const storeKey = async (key, value) => {
   }
 };
 
+/**
+ * Get the value associated with a given key
+ * @param {string} key
+ * @returns A promise of the value if not null, otherwise null
+ */
 export const getKey = async key => {
   try {
     const value = await AsyncStorage.getItem(key);
@@ -21,6 +31,9 @@ export const getKey = async key => {
   }
 };
 
+/**
+ * Clear all key-value pairs from storage
+ */
 export const clearAllKeys = async () => {
   try {
     await AsyncStorage.clear();
@@ -31,6 +44,9 @@ export const clearAllKeys = async () => {
   console.log('Done.');
 };
 
+/**
+ * Get all key-value pairs and print it to the console
+ */
 export const getAllKeys = async () => {
   let keys = [];
   try {

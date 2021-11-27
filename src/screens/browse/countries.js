@@ -1,13 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import countries from '../../data/countries.json';
+import { countryCodeEmoji } from 'country-code-emoji';
 
 export default function Continent({ route, navigation }) {
   const { name } = route.params;
 
   const renderItem = ({ item }) => (
     <View style={styles.country}>
-      <Text style={styles.countryText}>{item.country}</Text>
+      <Text style={styles.countryText}>
+        {countryCodeEmoji(item.code)} {item.name}
+      </Text>
     </View>
   );
   return (
@@ -15,7 +18,7 @@ export default function Continent({ route, navigation }) {
       <FlatList
         data={countries.filter(country => country.continent === name)}
         renderItem={renderItem}
-        keyExtractor={country => country.country}
+        keyExtractor={country => country.code}
       />
     </View>
   );
