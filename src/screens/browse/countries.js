@@ -1,16 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import countries from '../../data/countries.json';
-import { countryCodeEmoji } from 'country-code-emoji';
+import CustomButton from '../../components/CustomButton';
 
 export default function Continent({ route, navigation }) {
   const { name } = route.params;
 
   const renderItem = ({ item }) => (
     <View style={styles.country}>
-      <Text style={styles.countryText}>
-        {countryCodeEmoji(item.code)} {item.name}
-      </Text>
+      <CustomButton
+        text={item.name}
+        onPress={() =>
+          navigation.navigate('DetailsSelect', {
+            country: item.name,
+          })
+        }
+      />
     </View>
   );
   return (
@@ -28,13 +33,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingVertical: 10,
   },
   country: {
-    padding: 15,
-    borderBottomWidth: 1,
-  },
-  countryText: {
-    fontSize: 16,
-    fontWeight: '200',
+    margin: 7,
+    alignItems: 'center',
   },
 });

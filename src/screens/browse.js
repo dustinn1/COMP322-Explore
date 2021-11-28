@@ -5,6 +5,7 @@ import WelcomeScreen from '../screens/welcome';
 import ContinentsScreen from '../screens/browse/continents';
 import CountriesScreen from '../screens/browse/countries';
 import CountryScreen from '../screens/browse/country';
+import DetailsSelect from './browse/detailsSelect';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,11 @@ export default function Home({ navigation }) {
         name="Country"
         component={CountryScreen}
         options={({ route }) => ({ title: route.params.name })}
+      />
+      <Stack.Screen
+        name="DetailsSelect"
+        component={DetailsSelect}
+        options={{ title: 'Details' }}
       />
       <Stack.Screen
         name="Welcome"

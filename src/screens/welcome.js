@@ -15,6 +15,7 @@ export default function App({ navigation }) {
       />
       <CustomButton
         text="Get Started"
+        textSize={22}
         onPress={() => {
           navigation.navigate('ContinentsSelect');
           storeKey('welcome', 'true');

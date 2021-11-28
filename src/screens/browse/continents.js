@@ -75,6 +75,7 @@ export default function ContinentsScreen({ navigation }) {
       />
       <CustomButton
         text="Select"
+        textSize={22}
         onPress={() =>
           navigation.navigate('CountriesSelect', {
             name: data[activeIndex].title,
