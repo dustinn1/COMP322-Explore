@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import DatePicker from 'react-native-date-picker';
-//import { Calendar } from 'react-native-calendars';
 import CustomButton from '../../components/CustomButton';
 
-export default function DetailsSelect({ route }) {
+export default function DetailsSelect({ route, navigation }) {
   const { country } = route.params;
   const currentDate = new Date();
 
@@ -73,7 +72,14 @@ export default function DetailsSelect({ route }) {
           onChangeText={onChildrenAmountChange}
         />
       </View>
-      <CustomButton text="Continue" />
+      <CustomButton
+        text="Continue"
+        onPress={() =>
+          navigation.navigate('Results', {
+            country: country,
+          })
+        }
+      />
     </View>
   );
 }
