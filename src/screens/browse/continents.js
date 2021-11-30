@@ -19,19 +19,19 @@ const data = [
   {
     id: 3,
     title: 'Oceania',
-    image: require('../../assets/images/start/africa.png'),
+    image: require('../../assets/images/start/oceana.png'),
     loc: 'australianContinent',
   },
   {
     id: 4,
     title: 'Europe',
-    image: require('../../assets/images/start/africa.png'),
+    image: require('../../assets/images/start/europe.gif'),
     loc: 'europeanContinent',
   },
   {
     id: 5,
     title: 'North America',
-    image: require('../../assets/images/start/africa.png'),
+    image: require('../../assets/images/start/northamerica.gif'),
   },
   {
     id: 6,
