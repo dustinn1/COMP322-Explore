@@ -16,15 +16,20 @@ export default function DetailsSelect({ route, navigation }) {
   const [adultsAmount, onAdultsAmountChange] = useState(0);
   const [childrenAmount, onChildrenAmountChange] = useState(0);
 
+  //<Text style={styles.input}>Check In Date</Text>
+  //<Text>To</Text>
+  //<Text style={styles.input}>Check Out Date</Text>
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{country}</Text>
-      <View>
-        <Text>Check In Date</Text>
-        <Text>{checkInDate.toDateString()}</Text>
-        <Button title="Open" onPress={() => setCheckInDateOpen(true)} />
-        <DatePicker
-          modal
+      <View style={[styles.card, styles.shadowProp]}>
+      <View style={styles.side}>
+       
+          <Button title="Check In Date: " onPress={() => setCheckInDateOpen(true)} />
+          <Text style={styles.display}>{checkInDate.toDateString()}</Text>     
+          <DatePicker
+            modal
           mode="date"
           title="Set Check In Date"
           open={checkInDateOpen}
@@ -37,12 +42,10 @@ export default function DetailsSelect({ route, navigation }) {
             setCheckInDateOpen(false);
           }}
         />
-      </View>
-      <Text>To</Text>
-      <View>
-        <Text>Check Out Date</Text>
-        <Text>{checkOutDate.toDateString()}</Text>
-        <Button title="Open" onPress={() => setCheckOutDateOpen(true)} />
+     </View>
+      <View style={styles.side}>       
+        <Button title="Check Out Date:" onPress={() => setCheckOutDateOpen(true)} />
+        <Text style={styles.display}>{checkOutDate.toDateString()}</Text>       
         <DatePicker
           modal
           mode="date"
@@ -58,20 +61,25 @@ export default function DetailsSelect({ route, navigation }) {
           }}
         />
       </View>
-      <View>
-        <Text>Adults</Text>
+      
+
+      <View style={styles.side}> 
+        <Text style={styles.display}>Adults: </Text>
         <TextInput
+          style={styles.display}
           value={adultsAmount.toString()}
           onChangeText={onAdultsAmountChange}
         />
       </View>
-      <View>
-        <Text>Children</Text>
+      <View style={styles.side}>
+        <Text style={styles.display}> Children: </Text>
         <TextInput
+          style={styles.display}
           value={childrenAmount.toString()}
           onChangeText={onChildrenAmountChange}
         />
       </View>
+      
       <CustomButton
         text="Continue"
         onPress={() =>
@@ -81,19 +89,66 @@ export default function DetailsSelect({ route, navigation }) {
         }
       />
     </View>
+    </View>
+    
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     paddingVertical: 20,
+    paddingTop: 100,
     alignItems: 'center',
   },
   header: {
     fontSize: 30,
     fontWeight: '700',
     textAlign: 'center',
+   
+
+    backgroundColor: 'white',
+    borderRadius: 8,
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    width: '90%',
+    height:'10%',
+    alignItems: 'center',
+
+    shadowColor: '#171717',
+    shadowOffset: {width: -4, height: 8},
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+  },
+  card: {  
+    backgroundColor: 'white',
+    borderRadius: 8,
+    paddingVertical: 45,
+    paddingHorizontal: 25,
+    width: '90%',
+    height: '50%',
+    marginVertical: 10,
+    paddingBottom: 60,
+    alignItems: 'center',
+  
+  },
+  shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: {width: -4, height: 8},
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
+  },
+  display: {
+    fontSize: 15,
+    fontWeight: '600',
+    textAlign: 'center',
+    paddingTop: 10,
+    width: '40%',
+    //alignItems: 'center',
+
+  },
+  side: {
+    flexDirection: 'row',
+    paddingBottom: 10,
   },
 });
