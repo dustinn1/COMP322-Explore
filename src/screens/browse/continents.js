@@ -13,19 +13,19 @@ const data = [
   {
     id: 2,
     title: 'Africa',
-    image: require('../../assets/images/start/africa.png'),
+    image: require('../../assets/images/start/africa.jpg'),
     loc: 'africanContinent',
   },
   {
     id: 3,
     title: 'Oceania',
-    image: require('../../assets/images/start/oceana.png'),
+    image: require('../../assets/images/start/oceana.jpg'),
     loc: 'australianContinent',
   },
   {
     id: 4,
     title: 'Europe',
-    image: require('../../assets/images/start/europe.gif'),
+    image: require('../../assets/images/start/europe.jpg'),
     loc: 'europeanContinent',
   },
   {
