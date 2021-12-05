@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { getKey } from '../utils/AsyncStorage';
+//import { getKey } from '../utils/AsyncStorage';
+import auth from '@react-native-firebase/auth';
+
 import WelcomeScreen from '../screens/welcome';
 import ContinentsScreen from '../screens/browse/continents';
 import CountriesScreen from '../screens/browse/countries';
@@ -13,14 +15,9 @@ const Stack = createNativeStackNavigator();
 
 export default function Home({ navigation }) {
   useEffect(() => {
-    getKey('welcome')
-      .then(value => {
-        if (value !== 'true') {
-          navigation.navigate('Welcome');
-          console.log('running');
-        }
-      })
-      .catch(err => console.log(err));
+    if (auth().currentUser === null) {
+      navigation.navigate('Welcome');
+    }
   }, [navigation]);
 
   return (

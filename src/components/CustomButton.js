@@ -21,9 +21,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#eee',
     borderRadius: 4,
-    width: '80%',
+    width: '85%',
     paddingVertical: 10,
     paddingHorizontal: 25,
+    marginHorizontal: 10,
   },
   text: {
     textAlign: 'center',

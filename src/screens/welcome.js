@@ -1,9 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import CustomButton from '../components/CustomButton';
-import { storeKey } from '../utils/AsyncStorage';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App({ navigation }) {
+import SignUpScreen from './account/signup';
+import SignInScreen from './account/signin';
+
+const Stack = createNativeStackNavigator();
+
+function Screen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>
@@ -13,15 +18,41 @@ export default function App({ navigation }) {
         source={require('../assets/images/start/welcome.gif')}
         style={styles.image}
       />
-      <CustomButton
-        text="Get Started"
-        textSize={22}
-        onPress={() => {
-          navigation.navigate('ContinentsSelect');
-          storeKey('welcome', 'true');
-        }}
-      />
+      <View style={styles.buttonRow}>
+        <CustomButton
+          text="Sign Up"
+          textSize={22}
+          onPress={() => navigation.navigate('SignUp')}
+        />
+        <CustomButton
+          text="Sign In"
+          textSize={22}
+          onPress={() => navigation.navigate('SignIn')}
+        />
+      </View>
     </View>
+  );
+}
+
+export default function WelcomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="WelcomeScreen"
+        component={Screen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{ title: 'Sign Up' }}
+      />
+      <Stack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{ title: 'Sign In' }}
+      />
+    </Stack.Navigator>
   );
 }
 
@@ -42,5 +73,11 @@ const styles = StyleSheet.create({
   image: {
     resizeMode: 'contain',
     width: '100%',
+  },
+  buttonRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '50%',
   },
 });

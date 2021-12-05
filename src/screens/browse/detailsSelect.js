@@ -24,73 +24,76 @@ export default function DetailsSelect({ route, navigation }) {
     <View style={styles.container}>
       <Text style={styles.header}>{country}</Text>
       <View style={[styles.card, styles.shadowProp]}>
-      <View style={styles.side}>
-       
-          <Button title="Check In Date: " onPress={() => setCheckInDateOpen(true)} />
-          <Text style={styles.display}>{checkInDate.toDateString()}</Text>     
+        <View style={styles.side}>
+          <Button
+            title="Check In Date: "
+            onPress={() => setCheckInDateOpen(true)}
+          />
+          <Text style={styles.display}>{checkInDate.toDateString()}</Text>
           <DatePicker
             modal
-          mode="date"
-          title="Set Check In Date"
-          open={checkInDateOpen}
-          date={checkInDate}
-          onConfirm={date => {
-            setCheckInDateOpen(false);
-            setCheckInDate(date);
-          }}
-          onCancel={() => {
-            setCheckInDateOpen(false);
-          }}
-        />
-     </View>
-      <View style={styles.side}>       
-        <Button title="Check Out Date:" onPress={() => setCheckOutDateOpen(true)} />
-        <Text style={styles.display}>{checkOutDate.toDateString()}</Text>       
-        <DatePicker
-          modal
-          mode="date"
-          title="Set Check Out Date"
-          open={checkOutDateOpen}
-          date={checkOutDate}
-          onConfirm={date => {
-            setCheckOutDateOpen(false);
-            setCheckOutDate(date);
-          }}
-          onCancel={() => {
-            setCheckOutDateOpen(false);
-          }}
-        />
-      </View>
-      
+            mode="date"
+            title="Set Check In Date"
+            open={checkInDateOpen}
+            date={checkInDate}
+            onConfirm={date => {
+              setCheckInDateOpen(false);
+              setCheckInDate(date);
+            }}
+            onCancel={() => {
+              setCheckInDateOpen(false);
+            }}
+          />
+        </View>
+        <View style={styles.side}>
+          <Button
+            title="Check Out Date:"
+            onPress={() => setCheckOutDateOpen(true)}
+          />
+          <Text style={styles.display}>{checkOutDate.toDateString()}</Text>
+          <DatePicker
+            modal
+            mode="date"
+            title="Set Check Out Date"
+            open={checkOutDateOpen}
+            date={checkOutDate}
+            onConfirm={date => {
+              setCheckOutDateOpen(false);
+              setCheckOutDate(date);
+            }}
+            onCancel={() => {
+              setCheckOutDateOpen(false);
+            }}
+          />
+        </View>
 
-      <View style={styles.side}> 
-        <Text style={styles.display}>Adults: </Text>
-        <TextInput
-          style={styles.display}
-          value={adultsAmount.toString()}
-          onChangeText={onAdultsAmountChange}
+        <View style={styles.side}>
+          <Text style={styles.display}>Adults: </Text>
+          <TextInput
+            style={styles.display}
+            value={adultsAmount.toString()}
+            onChangeText={onAdultsAmountChange}
+          />
+        </View>
+        <View style={styles.side}>
+          <Text style={styles.display}> Children: </Text>
+          <TextInput
+            style={styles.display}
+            value={childrenAmount.toString()}
+            onChangeText={onChildrenAmountChange}
+          />
+        </View>
+
+        <CustomButton
+          text="Continue"
+          onPress={() =>
+            navigation.navigate('Results', {
+              country: country,
+            })
+          }
         />
       </View>
-      <View style={styles.side}>
-        <Text style={styles.display}> Children: </Text>
-        <TextInput
-          style={styles.display}
-          value={childrenAmount.toString()}
-          onChangeText={onChildrenAmountChange}
-        />
-      </View>
-      
-      <CustomButton
-        text="Continue"
-        onPress={() =>
-          navigation.navigate('Results', {
-            country: country,
-          })
-        }
-      />
     </View>
-    </View>
-    
   );
 }
 
@@ -105,22 +108,21 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
     textAlign: 'center',
-   
 
     backgroundColor: 'white',
     borderRadius: 8,
     paddingVertical: 15,
     paddingHorizontal: 15,
     width: '90%',
-    height:'10%',
+    height: '10%',
     alignItems: 'center',
 
     shadowColor: '#171717',
-    shadowOffset: {width: -4, height: 8},
+    shadowOffset: { width: -4, height: 8 },
     shadowOpacity: 0.4,
     shadowRadius: 3,
   },
-  card: {  
+  card: {
     backgroundColor: 'white',
     borderRadius: 8,
     paddingVertical: 45,
@@ -130,11 +132,10 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingBottom: 60,
     alignItems: 'center',
-  
   },
   shadowProp: {
     shadowColor: '#171717',
-    shadowOffset: {width: -4, height: 8},
+    shadowOffset: { width: -4, height: 8 },
     shadowOpacity: 0.4,
     shadowRadius: 3,
   },
@@ -145,7 +146,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     width: '40%',
     //alignItems: 'center',
-
   },
   side: {
     flexDirection: 'row',
