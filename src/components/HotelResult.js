@@ -8,6 +8,7 @@ const HotelResult = ({ item, navigation }) => {
       onPress={() =>
         navigation.navigate('Hotel', {
           name: item.hotel_name,
+          searchData: item,
         })
       }>
       <Image

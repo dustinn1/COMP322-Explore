@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import CustomButton from '../../components/CustomButton';
+import CustomInput from '../../components/CustomInput';
 
 export default function DetailsSelect({ route, navigation }) {
   const { country } = route.params;
@@ -16,79 +17,71 @@ export default function DetailsSelect({ route, navigation }) {
   const [adultsAmount, onAdultsAmountChange] = useState(0);
   const [childrenAmount, onChildrenAmountChange] = useState(0);
 
-  //<Text style={styles.input}>Check In Date</Text>
-  //<Text>To</Text>
-  //<Text style={styles.input}>Check Out Date</Text>
-
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{country}</Text>
-      <View style={[styles.card, styles.shadowProp]}>
-        <View style={styles.side}>
-          <Button
-            title="Check In Date: "
-            onPress={() => setCheckInDateOpen(true)}
-          />
-          <Text style={styles.display}>{checkInDate.toDateString()}</Text>
-          <DatePicker
-            modal
-            mode="date"
-            title="Set Check In Date"
-            open={checkInDateOpen}
-            date={checkInDate}
-            onConfirm={date => {
-              setCheckInDateOpen(false);
-              setCheckInDate(date);
-            }}
-            onCancel={() => {
-              setCheckInDateOpen(false);
-            }}
-          />
-        </View>
-        <View style={styles.side}>
-          <Button
-            title="Check Out Date:"
-            onPress={() => setCheckOutDateOpen(true)}
-          />
-          <Text style={styles.display}>{checkOutDate.toDateString()}</Text>
-          <DatePicker
-            modal
-            mode="date"
-            title="Set Check Out Date"
-            open={checkOutDateOpen}
-            date={checkOutDate}
-            onConfirm={date => {
-              setCheckOutDateOpen(false);
-              setCheckOutDate(date);
-            }}
-            onCancel={() => {
-              setCheckOutDateOpen(false);
-            }}
-          />
-        </View>
-
-        <View style={styles.side}>
-          <Text style={styles.display}>Adults: </Text>
-          <TextInput
-            style={styles.display}
-            value={adultsAmount.toString()}
-            onChangeText={onAdultsAmountChange}
-          />
-        </View>
-        <View style={styles.side}>
-          <Text style={styles.display}> Children: </Text>
-          <TextInput
-            style={styles.display}
-            value={childrenAmount.toString()}
-            onChangeText={onChildrenAmountChange}
-          />
-        </View>
-
+      <View style={styles.inputs}>
+        <Text>Check in Date</Text>
+        <Button
+          title={checkInDate.toDateString()}
+          onPress={() => setCheckInDateOpen(true)}
+        />
+        <DatePicker
+          modal
+          mode="date"
+          title="Set Check In Date"
+          open={checkInDateOpen}
+          date={checkInDate}
+          onConfirm={date => {
+            setCheckInDateOpen(false);
+            setCheckInDate(date);
+          }}
+          onCancel={() => {
+            setCheckInDateOpen(false);
+          }}
+        />
+        <Text>Check Out Date</Text>
+        <Button
+          title={checkOutDate.toDateString()}
+          onPress={() => setCheckOutDateOpen(true)}
+        />
+        <DatePicker
+          modal
+          mode="date"
+          title="Set Check Out Date"
+          open={checkOutDateOpen}
+          date={checkOutDate}
+          onConfirm={date => {
+            setCheckOutDateOpen(false);
+            setCheckOutDate(date);
+          }}
+          onCancel={() => {
+            setCheckOutDateOpen(false);
+          }}
+        />
+      </View>
+      <View style={styles.inputs}>
+        <CustomInput
+          value={adultsAmount.toString()}
+          onChangeText={onAdultsAmountChange}
+          label="Number of Adults"
+          errorMessage=""
+        />
+        <CustomInput
+          value={childrenAmount.toString()}
+          onChangeText={onChildrenAmountChange}
+          label="Number of Children (Optional)"
+          errorMessage=""
+        />
         <CustomButton
           text="Continue"
           onPress={() =>
             navigation.navigate('Results', {
               country: country,
+              checkInDate: checkInDate,
+              checkOutDate: checkOutDate,
+              adultsAmount: adultsAmount,
+              childrenAmount: childrenAmount,
             })
           }
         />
@@ -100,55 +93,24 @@ export default function DetailsSelect({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 20,
-    paddingTop: 100,
+    backgroundColor: '#fff',
     alignItems: 'center',
   },
   header: {
     fontSize: 30,
     fontWeight: '700',
     textAlign: 'center',
-
-    backgroundColor: 'white',
-    borderRadius: 8,
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    width: '90%',
-    height: '10%',
-    alignItems: 'center',
-
-    shadowColor: '#171717',
-    shadowOffset: { width: -4, height: 8 },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
+    marginVertical: 50,
   },
-  card: {
-    backgroundColor: 'white',
-    borderRadius: 8,
-    paddingVertical: 45,
-    paddingHorizontal: 25,
+  inputs: {
     width: '90%',
-    height: '50%',
-    marginVertical: 10,
-    paddingBottom: 60,
+    marginVertical: 20,
     alignItems: 'center',
-  },
-  shadowProp: {
-    shadowColor: '#171717',
-    shadowOffset: { width: -4, height: 8 },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
   },
   display: {
     fontSize: 15,
     fontWeight: '600',
     textAlign: 'center',
     paddingTop: 10,
-    width: '40%',
-    //alignItems: 'center',
-  },
-  side: {
-    flexDirection: 'row',
-    paddingBottom: 10,
   },
 });

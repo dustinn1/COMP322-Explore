@@ -42,7 +42,11 @@ export default function Home({ navigation }) {
         component={DetailsSelect}
         options={{ title: 'Details' }}
       />
-      <Stack.Screen name="Results" component={ResultsScreen} />
+      <Stack.Screen
+        name="Results"
+        component={ResultsScreen}
+        options={{ headerBackTitle: 'Edit Details' }}
+      />
       <Stack.Screen
         name="Hotel"
         component={HotelScreen}
