@@ -1,0 +1,191 @@
+[
+  {
+    "roomfacilitytype_id": "",
+    "hotelfacilitytype_id": 3,
+    "facilitytype_name": "Food & Drink",
+    "facility_name": "Restaurant",
+    "is_common_room_facility": 0,
+    "facilitytype_id": 7,
+    "kind": "boolean",
+    "value": 1,
+    "hotel_id": 6808317
+  },
+  {
+    "hotel_id": 6808317,
+    "kind": "boolean",
+    "value": 1,
+    "facilitytype_id": 7,
+    "is_common_room_facility": 0,
+    "facility_name": "Bar",
+    "facilitytype_name": "Food & Drink",
+    "hotelfacilitytype_id": 7,
+    "roomfacilitytype_id": ""
+  },
+  {
+    "roomfacilitytype_id": "",
+    "hotelfacilitytype_id": 14,
+    "facility_name": "Garden",
+    "facilitytype_name": "Outdoors",
+    "facilitytype_id": 13,
+    "kind": "boolean",
+    "value": 1,
+    "hotel_id": 6808317,
+    "is_common_room_facility": 0
+  },
+  {
+    "hotelfacilitytype_id": 16,
+    "roomfacilitytype_id": "",
+    "is_common_room_facility": 0,
+    "kind": "boolean",
+    "hotel_id": 6808317,
+    "value": 1,
+    "facilitytype_id": 1,
+    "facilitytype_name": "General",
+    "facility_name": "Non-smoking rooms"
+  },
+  {
+    "is_common_room_facility": 0,
+    "kind": "free_or_paid",
+    "hotel_id": 6808317,
+    "facilitytype_id": 3,
+    "facilitytype_name": "Services",
+    "free": 1,
+    "facility_name": "Express check-in/check-out",
+    "value": 4,
+    "roomfacilitytype_id": "",
+    "hotelfacilitytype_id": 49
+  },
+  {
+    "kind": "boolean",
+    "facilitytype_id": 1,
+    "value": 1,
+    "hotel_id": 6808317,
+    "is_common_room_facility": 0,
+    "facility_name": "Heating",
+    "facilitytype_name": "General",
+    "hotelfacilitytype_id": 80,
+    "roomfacilitytype_id": ""
+  },
+  {
+    "hotelfacilitytype_id": 108,
+    "roomfacilitytype_id": "",
+    "is_common_room_facility": 0,
+    "kind": "boolean",
+    "hotel_id": 6808317,
+    "value": 1,
+    "facilitytype_id": 1,
+    "facilitytype_name": "General",
+    "facility_name": "Non-smoking throughout"
+  },
+  {
+    "is_common_room_facility": 0,
+    "kind": "free_or_paid",
+    "hotel_id": 6808317,
+    "facilitytype_id": 1,
+    "hotelfacilitytype_id": 109,
+    "roomfacilitytype_id": "",
+    "value": 4,
+    "free": 1,
+    "facilitytype_name": "General",
+    "facility_name": "Air conditioning"
+  },
+  {
+    "facility_name": "Private check-in/check-out",
+    "facilitytype_name": "Services",
+    "hotel_id": 6808317,
+    "kind": "boolean",
+    "value": 1,
+    "facilitytype_id": 3,
+    "is_common_room_facility": 0,
+    "roomfacilitytype_id": "",
+    "hotelfacilitytype_id": 127
+  },
+  {
+    "hotelfacilitytype_id": 149,
+    "roomfacilitytype_id": "",
+    "is_common_room_facility": 0,
+    "kind": "boolean",
+    "facilitytype_id": 1,
+    "value": 1,
+    "hotel_id": 6808317,
+    "facilitytype_name": "General",
+    "facility_name": "Adult only"
+  },
+  {
+    "is_common_room_facility": 0,
+    "kind": "boolean",
+    "hotel_id": 6808317,
+    "value": 1,
+    "facilitytype_id": 21,
+    "facilitytype_name": "Pool and wellness",
+    "facility_name": "Pool/beach towels",
+    "hotelfacilitytype_id": 198,
+    "roomfacilitytype_id": ""
+  },
+  {
+    "is_common_room_facility": 0,
+    "kind": "boolean",
+    "value": 1,
+    "facilitytype_id": 29,
+    "hotel_id": 6808317,
+    "facilitytype_name": "Miscellaneous",
+    "facility_name": "24-hour security",
+    "hotelfacilitytype_id": 418,
+    "roomfacilitytype_id": ""
+  },
+  {
+    "roomfacilitytype_id": "",
+    "hotelfacilitytype_id": 422,
+    "facility_name": "Smoke alarms",
+    "facilitytype_name": "Miscellaneous",
+    "kind": "boolean",
+    "value": 1,
+    "hotel_id": 6808317,
+    "facilitytype_id": 29,
+    "is_common_room_facility": 0
+  },
+  {
+    "facility_name": "CCTV in common areas",
+    "facilitytype_name": "Miscellaneous",
+    "kind": "boolean",
+    "value": 1,
+    "facilitytype_id": 29,
+    "hotel_id": 6808317,
+    "is_common_room_facility": 0,
+    "roomfacilitytype_id": "",
+    "hotelfacilitytype_id": 423
+  },
+  {
+    "roomfacilitytype_id": "",
+    "hotelfacilitytype_id": 424,
+    "facility_name": "CCTV outside property",
+    "facilitytype_name": "Miscellaneous",
+    "facilitytype_id": 29,
+    "kind": "boolean",
+    "value": 1,
+    "hotel_id": 6808317,
+    "is_common_room_facility": 0
+  },
+  {
+    "facilitytype_id": 29,
+    "kind": "boolean",
+    "value": 1,
+    "hotel_id": 6808317,
+    "is_common_room_facility": 0,
+    "facility_name": "Fire extinguishers",
+    "facilitytype_name": "Miscellaneous",
+    "hotelfacilitytype_id": 425,
+    "roomfacilitytype_id": ""
+  },
+  {
+    "roomfacilitytype_id": "",
+    "hotelfacilitytype_id": 465,
+    "facilitytype_name": "Reception services",
+    "facility_name": "Invoice provided",
+    "is_common_room_facility": 0,
+    "kind": "boolean",
+    "value": 1,
+    "facilitytype_id": 23,
+    "hotel_id": 6808317
+  }
+]
