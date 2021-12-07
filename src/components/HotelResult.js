@@ -1,7 +1,14 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image, Pressable } from 'react-native';
 
-const HotelResult = ({ item, navigation }) => {
+const HotelResult = ({
+  item,
+  navigation,
+  checkInDate,
+  checkOutDate,
+  adultsAmount,
+  roomAmount,
+}) => {
   return (
     <Pressable
       style={styles.container}
@@ -10,6 +17,10 @@ const HotelResult = ({ item, navigation }) => {
           screen: 'Main',
           name: item.hotel_name,
           searchData: item,
+          checkInDate: checkInDate,
+          checkOutDate: checkOutDate,
+          adultsAmount: adultsAmount,
+          roomAmount: roomAmount,
         })
       }>
       <Image

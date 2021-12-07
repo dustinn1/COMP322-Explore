@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import BrowseScreen from './screens/browse';
 import SavedScreen from './screens/saved';
-import HistoryScreen from './screens/history';
 import SettingsScreen from './screens/settings';
 
 MaterialIcons.loadFont();
@@ -38,16 +37,6 @@ export default function App() {
               tabBarLabel: 'Saved',
               tabBarIcon: ({ color, size }) => (
                 <MaterialIcons name="favorite" color={color} size={size} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="History"
-            component={HistoryScreen}
-            options={{
-              tabBarLabel: 'History',
-              tabBarIcon: ({ color, size }) => (
-                <MaterialIcons name="history" color={color} size={size} />
               ),
             }}
           />

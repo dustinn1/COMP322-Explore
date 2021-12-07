@@ -73,7 +73,14 @@ export default function Results({ route, navigation }) {
         <FlatList
           data={results.result}
           renderItem={({ item }) => (
-            <HotelResult item={item} navigation={navigation} />
+            <HotelResult
+              item={item}
+              navigation={navigation}
+              checkInDate={checkInDate}
+              checkOutDate={checkOutDate}
+              adultsAmount={adultsAmount}
+              roomAmount={roomAmount}
+            />
           )}
           keyExtractor={hotel => hotel.hotel_id}
           ListHeaderComponent={<ResultsHeader />}

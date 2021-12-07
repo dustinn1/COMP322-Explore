@@ -53,7 +53,8 @@ const reviewsFetch = hotel_id =>
   ).then(res => res.json());
 
 export default function HotelScreen({ route, navigation }) {
-  const { searchData } = route.params;
+  const { searchData, checkInDate, checkOutDate, adultsAmount, roomAmount } =
+    route.params;
   const [galleryVisible, setGalleryVisible] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -111,7 +112,15 @@ export default function HotelScreen({ route, navigation }) {
             <CustomButton
               half
               text="Book"
-              onPress={() => navigation.navigate('HotelRooms')}
+              onPress={() =>
+                navigation.navigate('HotelRooms', {
+                  checkInDate: checkInDate,
+                  checkOutDate: checkOutDate,
+                  adultsAmount: adultsAmount,
+                  roomAmount: roomAmount,
+                  hotelId: searchData.hotel_id,
+                })
+              }
             />
           </View>
           <View style={styles.section}>
