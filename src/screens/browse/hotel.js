@@ -18,12 +18,26 @@ import CustomButton from '../../components/CustomButton';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import secret from '../../data/secret.json';
 
-function saveHotel(hotel_id) {
+function saveHotel(
+  hotel_id,
+  name,
+  checkInDate,
+  checkOutDate,
+  adultsAmount,
+  roomAmount,
+  searchData,
+) {
   firestore()
-    .collection('users')
+    .collection(auth().currentUser.uid)
     .add({
-      uid: auth().currentUser.uid,
+      date_saved: new Date(),
       hotel_id: hotel_id,
+      name: name,
+      check_in_date: checkInDate,
+      check_out_date: checkOutDate,
+      adults_amount: adultsAmount,
+      room_amount: roomAmount,
+      extraData: searchData,
     })
     .then(() => {
       console.log('User added!');
@@ -67,8 +81,14 @@ const reviewsFetch = hotel_id =>
   ).then(res => res.json());
 
 export default function HotelScreen({ route, navigation }) {
-  const { searchData, checkInDate, checkOutDate, adultsAmount, roomAmount } =
-    route.params;
+  const {
+    name,
+    searchData,
+    checkInDate,
+    checkOutDate,
+    adultsAmount,
+    roomAmount,
+  } = route.params;
   const [galleryVisible, setGalleryVisible] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -109,7 +129,7 @@ export default function HotelScreen({ route, navigation }) {
             source={{ uri: searchData.max_photo_url }}
           />
           <View style={styles.section}>
-            <Text style={styles.headerText}>{searchData.hotel_name}</Text>
+            <Text style={styles.headerText}>{name}</Text>
             <View style={styles.headerBottomRow}>
               <Text>
                 {[...Array(searchData.class)].map((e, i) => (
@@ -122,7 +142,21 @@ export default function HotelScreen({ route, navigation }) {
             </View>
           </View>
           <View style={[styles.section, styles.buttonRow]}>
-            <CustomButton half text="Save" onPress={() => saveHotel()} />
+            <CustomButton
+              half
+              text="Save"
+              onPress={() =>
+                saveHotel(
+                  searchData.hotel_id,
+                  name,
+                  checkInDate,
+                  checkOutDate,
+                  adultsAmount,
+                  roomAmount,
+                  searchData,
+                )
+              }
+            />
             <CustomButton
               half
               text="Book"

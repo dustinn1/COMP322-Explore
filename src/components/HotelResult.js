@@ -35,12 +35,14 @@ const HotelResult = ({
         <Text style={styles.hotel_name}>{item.hotel_name}</Text>
         <View style={styles.info_bottom}>
           <Text>{item.city}</Text>
-          <Text style={styles.price}>
-            {Intl.NumberFormat('en-US', {
-              style: 'currency',
-              currency: item.currencycode,
-            }).format(item.min_total_price)}
-          </Text>
+          {item.min_total_price && (
+            <Text style={styles.price}>
+              {Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: item.currencycode,
+              }).format(item.min_total_price)}
+            </Text>
+          )}
         </View>
       </View>
     </Pressable>
