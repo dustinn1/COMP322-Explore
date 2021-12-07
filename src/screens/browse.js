@@ -6,12 +6,10 @@ import auth from '@react-native-firebase/auth';
 import WelcomeScreen from '../screens/welcome';
 import ContinentsScreen from '../screens/browse/continents';
 import CountriesScreen from '../screens/browse/countries';
-import CountryScreen from '../screens/browse/country';
 import DetailsSelect from './browse/detailsSelect';
 import ResultsScreen from './browse/results';
 import HotelScreen from './browse/hotel';
 import HotelRoomsScreen from './browse/rooms';
-import HotelReviewsScreen from './browse/reviews';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,11 +30,6 @@ export default function Home({ navigation }) {
       <Stack.Screen
         name="CountriesSelect"
         component={CountriesScreen}
-        options={({ route }) => ({ title: route.params.name })}
-      />
-      <Stack.Screen
-        name="Country"
-        component={CountryScreen}
         options={({ route }) => ({ title: route.params.name })}
       />
       <Stack.Screen
@@ -64,15 +57,6 @@ export default function Home({ navigation }) {
         component={HotelRoomsScreen}
         options={{
           title: 'Rooms',
-          presentation: 'modal',
-          headerBackVisible: true,
-        }}
-      />
-      <Stack.Screen
-        name="HotelReviews"
-        component={HotelReviewsScreen}
-        options={{
-          title: 'Reviews',
           presentation: 'modal',
           headerBackVisible: true,
         }}

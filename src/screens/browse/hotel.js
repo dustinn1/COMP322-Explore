@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ScrollView,
   View,
@@ -8,22 +8,69 @@ import {
   Dimensions,
   FlatList,
   Pressable,
-  Button,
+  ActivityIndicator,
 } from 'react-native';
 import ProgressBar from 'react-native-progress/Bar';
 import ImageView from 'react-native-image-viewing';
 import CustomButton from '../../components/CustomButton';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import secret from '../../data/secret.json';
 
-import description from '../../data/description_test.json';
-import photos from '../../data/photos_test.json';
-import review_scores from '../../data/review_scores_test.json';
-import reviews from '../../data/reviews_test.json';
+const descriptionFetch = hotel_id =>
+  fetch(
+    `https://booking-com.p.rapidapi.com/v1/hotels/description?locale=en-us&hotel_id=${hotel_id}`,
+    {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': 'booking-com.p.rapidapi.com',
+        'x-rapidapi-key': secret.apiKey,
+      },
+    },
+  ).then(res => res.json());
+
+const photosFetch = hotel_id =>
+  fetch(
+    `https://booking-com.p.rapidapi.com/v1/hotels/photos?locale=en-us&hotel_id=${hotel_id}`,
+    {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': 'booking-com.p.rapidapi.com',
+        'x-rapidapi-key': secret.apiKey,
+      },
+    },
+  ).then(res => res.json());
+
+const reviewsFetch = hotel_id =>
+  fetch(
+    `https://booking-com.p.rapidapi.com/v1/hotels/review-scores?locale=en-us&hotel_id=${hotel_id}`,
+    {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': 'booking-com.p.rapidapi.com',
+        'x-rapidapi-key': secret.apiKey,
+      },
+    },
+  ).then(res => res.json());
 
 export default function HotelScreen({ route, navigation }) {
   const { searchData } = route.params;
   const [galleryVisible, setGalleryVisible] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    Promise.all([
+      descriptionFetch(searchData.hotel_id),
+      photosFetch(searchData.hotel_id),
+      reviewsFetch(searchData.hotel_id),
+    ])
+      .then(res => {
+        setData(res);
+        setLoaded(true);
+      })
+      .catch(err => console.error(err));
+  }, [searchData.hotel_id]);
 
   const photoRenderItem = ({ item, index }) => {
     return (
@@ -39,97 +86,97 @@ export default function HotelScreen({ route, navigation }) {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Image
-        style={styles.headerImage}
-        source={{ uri: searchData.max_photo_url }}
-      />
-      <View style={styles.section}>
-        <Text style={styles.headerText}>{searchData.hotel_name}</Text>
-        <View style={styles.headerBottomRow}>
-          <Text>
-            {[...Array(searchData.class)].map((e, i) => (
-              <Icon name="star" key={i} />
-            ))}
-          </Text>
-          <Text>
-            {searchData.address}, {searchData.city} {searchData.zip}
-          </Text>
-        </View>
-      </View>
-      <View style={[styles.section, styles.buttonRow]}>
-        <CustomButton half text="Save" />
-        <CustomButton
-          half
-          text="Book"
-          onPress={() => navigation.navigate('HotelRooms')}
-        />
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.description}>{description.description}</Text>
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionHeader}>Photos ({photos.length})</Text>
-        <FlatList
-          data={photos}
-          renderItem={photoRenderItem}
-          keyExtractor={photo => photo.photo_id}
-          horizontal
-          nestedScrollEnabled
-        />
-        <ImageView
-          images={photos.map(photo => {
-            return {
-              uri: photo.url_max,
-            };
-          })}
-          imageIndex={imageIndex}
-          visible={galleryVisible}
-          onRequestClose={() => setGalleryVisible(false)}
-        />
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionHeader}>Reviews</Text>
-        <View style={styles.reviewScoresTotal}>
-          <ProgressBar
-            progress={searchData.review_score / 10}
-            width={Dimensions.get('window').width / 1.1}
-            height={8}
-            color="gold"
+    <>
+      {loaded ? (
+        <ScrollView style={styles.container}>
+          <Image
+            style={styles.headerImage}
+            source={{ uri: searchData.max_photo_url }}
           />
-          <Text style={styles.reviewScoresTotalText}>
-            Total: {searchData.review_score}
-          </Text>
-          <Button
-            onPress={() =>
-              navigation.navigate('HotelReviews', {
-                reviews: reviews,
-              })
-            }
-            title="All Reviews"
-          />
+          <View style={styles.section}>
+            <Text style={styles.headerText}>{searchData.hotel_name}</Text>
+            <View style={styles.headerBottomRow}>
+              <Text>
+                {[...Array(searchData.class)].map((e, i) => (
+                  <Icon name="star" key={i} />
+                ))}
+              </Text>
+              <Text>
+                {searchData.address}, {searchData.city} {searchData.zip}
+              </Text>
+            </View>
+          </View>
+          <View style={[styles.section, styles.buttonRow]}>
+            <CustomButton half text="Save" />
+            <CustomButton
+              half
+              text="Book"
+              onPress={() => navigation.navigate('HotelRooms')}
+            />
+          </View>
+          <View style={styles.section}>
+            <Text style={styles.description}>{data[0].description}</Text>
+          </View>
+          <View style={styles.section}>
+            <Text style={styles.sectionHeader}>Photos ({data[1].length})</Text>
+            <FlatList
+              data={data[1]}
+              renderItem={photoRenderItem}
+              keyExtractor={photo => photo.photo_id}
+              horizontal
+              nestedScrollEnabled
+            />
+            <ImageView
+              images={data[1].map(photo => {
+                return {
+                  uri: photo.url_max,
+                };
+              })}
+              imageIndex={imageIndex}
+              visible={galleryVisible}
+              onRequestClose={() => setGalleryVisible(false)}
+            />
+          </View>
+          <View style={styles.section}>
+            <Text style={styles.sectionHeader}>Reviews</Text>
+            <View style={styles.reviewScoresTotal}>
+              <ProgressBar
+                progress={searchData.review_score / 10}
+                width={Dimensions.get('window').width / 1.1}
+                height={8}
+                color="gold"
+              />
+              <Text style={styles.reviewScoresTotalText}>
+                Total: {searchData.review_score}
+              </Text>
+            </View>
+            <View style={styles.reviewScores}>
+              {data[2].score_breakdown
+                .filter(item => item.customer_type === 'total')
+                .map(item =>
+                  item.question
+                    .filter(question => question.question !== 'total')
+                    .map(question => (
+                      <View style={styles.reviewScore} key={question.question}>
+                        <ProgressBar
+                          progress={question.score / 10}
+                          width={Dimensions.get('window').width / 2.5}
+                        />
+                        <Text style={styles.reviewScoreText}>
+                          {question.localized_question}: {question.score}
+                        </Text>
+                      </View>
+                    )),
+                )}
+            </View>
+          </View>
+        </ScrollView>
+      ) : (
+        <View style={[styles.container, styles.indicatorContainer]}>
+          <ActivityIndicator />
         </View>
-        <View style={styles.reviewScores}>
-          {review_scores.score_breakdown
-            .filter(item => item.customer_type === 'total')
-            .map(item =>
-              item.question
-                .filter(question => question.question !== 'total')
-                .map(question => (
-                  <View style={styles.reviewScore} key={question.question}>
-                    <ProgressBar
-                      progress={question.score / 10}
-                      width={Dimensions.get('window').width / 2.5}
-                    />
-                    <Text style={styles.reviewScoreText}>
-                      {question.localized_question}: {question.score}
-                    </Text>
-                  </View>
-                )),
-            )}
-        </View>
-      </View>
-    </ScrollView>
+      )}
+    </>
   );
 }
 
@@ -137,6 +184,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  indicatorContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerImage: {
     width: Dimensions.get('screen').width,
@@ -150,6 +201,7 @@ const styles = StyleSheet.create({
   },
   headerBottomRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
