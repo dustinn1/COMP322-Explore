@@ -10,11 +10,25 @@ import {
   Pressable,
   ActivityIndicator,
 } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 import ProgressBar from 'react-native-progress/Bar';
 import ImageView from 'react-native-image-viewing';
 import CustomButton from '../../components/CustomButton';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import secret from '../../data/secret.json';
+
+function saveHotel(hotel_id) {
+  firestore()
+    .collection('users')
+    .add({
+      uid: auth().currentUser.uid,
+      hotel_id: hotel_id,
+    })
+    .then(() => {
+      console.log('User added!');
+    });
+}
 
 const descriptionFetch = hotel_id =>
   fetch(
@@ -108,7 +122,7 @@ export default function HotelScreen({ route, navigation }) {
             </View>
           </View>
           <View style={[styles.section, styles.buttonRow]}>
-            <CustomButton half text="Save" />
+            <CustomButton half text="Save" onPress={() => saveHotel()} />
             <CustomButton
               half
               text="Book"

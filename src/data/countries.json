@@ -149,37 +149,43 @@
     "name": "Belgium",
     "continent": "Europe",
     "code": "BE",
-    "alpha_3": "BEL"
+    "alpha_3": "BEL",
+    "dest_id": 21
   },
   {
     "name": "Belize",
     "continent": "North America",
     "code": "BZ",
-    "alpha_3": "BLZ"
+    "alpha_3": "BLZ",
+    "dest_id": 22
   },
   {
     "name": "Benin",
     "continent": "Africa",
     "code": "BJ",
-    "alpha_3": "BEN"
+    "alpha_3": "BEN",
+    "dest_id": 23
   },
   {
     "name": "Bermuda",
     "continent": "North America",
     "code": "BM",
-    "alpha_3": "BMU"
+    "alpha_3": "BMU",
+    "dest_id": 24
   },
   {
     "name": "Bhutan",
     "continent": "Asia",
     "code": "BT",
-    "alpha_3": "BTN"
+    "alpha_3": "BTN",
+    "dest_id": 25
   },
   {
     "name": "Bolivia",
     "continent": "South America",
     "code": "BO",
-    "alpha_3": "BOL"
+    "alpha_3": "BOL",
+    "dest_id": 26
   },
   {
     "name": "Bonaire, Sint Eustatius and Saba",
@@ -191,13 +197,15 @@
     "name": "Bosnia and Herzegovina",
     "continent": "Europe",
     "code": "BA",
-    "alpha_3": "BIH"
+    "alpha_3": "BIH",
+    "dest_id": 27
   },
   {
     "name": "Botswana",
     "continent": "Africa",
     "code": "BW",
-    "alpha_3": "BWA"
+    "alpha_3": "BWA",
+    "dest_id": 28
   },
   {
     "name": "Bouvet Island",
