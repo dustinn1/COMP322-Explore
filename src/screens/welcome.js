@@ -22,11 +22,13 @@ function Screen({ navigation }) {
         <CustomButton
           text="Sign Up"
           textSize={22}
+          half
           onPress={() => navigation.navigate('SignUp')}
         />
         <CustomButton
           text="Sign In"
           textSize={22}
+          half
           onPress={() => navigation.navigate('SignIn')}
         />
       </View>
@@ -78,6 +80,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    width: '50%',
+    width: '90%',
   },
 });

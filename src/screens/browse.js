@@ -10,6 +10,8 @@ import CountryScreen from '../screens/browse/country';
 import DetailsSelect from './browse/detailsSelect';
 import ResultsScreen from './browse/results';
 import HotelScreen from './browse/hotel';
+import HotelRoomsScreen from './browse/rooms';
+import HotelReviewsScreen from './browse/reviews';
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +58,24 @@ export default function Home({ navigation }) {
               ? route.params.name
               : route.params.name.substring(0, 17) + '...',
         })}
+      />
+      <Stack.Screen
+        name="HotelRooms"
+        component={HotelRoomsScreen}
+        options={{
+          title: 'Rooms',
+          presentation: 'modal',
+          headerBackVisible: true,
+        }}
+      />
+      <Stack.Screen
+        name="HotelReviews"
+        component={HotelReviewsScreen}
+        options={{
+          title: 'Reviews',
+          presentation: 'modal',
+          headerBackVisible: true,
+        }}
       />
       <Stack.Screen
         name="Welcome"

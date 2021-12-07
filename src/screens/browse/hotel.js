@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ScrollView,
   View,
@@ -7,27 +7,36 @@ import {
   Image,
   Dimensions,
   FlatList,
+  Pressable,
+  Button,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import ProgressBar from 'react-native-progress/Bar';
+import ImageView from 'react-native-image-viewing';
+import CustomButton from '../../components/CustomButton';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import description from '../../data/description_test.json';
 import photos from '../../data/photos_test.json';
 import review_scores from '../../data/review_scores_test.json';
+import reviews from '../../data/reviews_test.json';
 
-const photoRenderItem = ({ item, index }) => {
-  return (
-    <View style={styles.galleryPhotoContainer}>
-      <Image style={styles.galleryPhoto} source={{ uri: item.url_max }} />
-      <Text>
-        {index + 1} / {photos.length}{' '}
-      </Text>
-    </View>
-  );
-};
-
-export default function HotelScreen({ route }) {
+export default function HotelScreen({ route, navigation }) {
   const { searchData } = route.params;
+  const [galleryVisible, setGalleryVisible] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const photoRenderItem = ({ item, index }) => {
+    return (
+      <Pressable
+        style={styles.galleryPhotoContainer}
+        onPress={() => {
+          setImageIndex(index);
+          setGalleryVisible(true);
+        }}>
+        <Image style={styles.galleryPhoto} source={{ uri: item.url_max }} />
+      </Pressable>
+    );
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -37,28 +46,48 @@ export default function HotelScreen({ route }) {
       />
       <View style={styles.section}>
         <Text style={styles.headerText}>{searchData.hotel_name}</Text>
-        <Text>
-          {[...Array(searchData.class)].map((e, i) => (
-            <Icon name="star" key={i} />
-          ))}
-        </Text>
+        <View style={styles.headerBottomRow}>
+          <Text>
+            {[...Array(searchData.class)].map((e, i) => (
+              <Icon name="star" key={i} />
+            ))}
+          </Text>
+          <Text>
+            {searchData.address}, {searchData.city} {searchData.zip}
+          </Text>
+        </View>
       </View>
-      <View style={styles.section}>
-        <Text>
-          {searchData.address}, {searchData.city} {searchData.zip}
-        </Text>
+      <View style={[styles.section, styles.buttonRow]}>
+        <CustomButton half text="Save" />
+        <CustomButton
+          half
+          text="Book"
+          onPress={() => navigation.navigate('HotelRooms')}
+        />
       </View>
       <View style={styles.section}>
         <Text style={styles.description}>{description.description}</Text>
       </View>
-      <Text style={styles.sectionHeader}>Photos ({photos.length})</Text>
-      <FlatList
-        data={photos}
-        renderItem={photoRenderItem}
-        keyExtractor={photo => photo.photo_id}
-        horizontal
-        nestedScrollEnabled
-      />
+      <View style={styles.section}>
+        <Text style={styles.sectionHeader}>Photos ({photos.length})</Text>
+        <FlatList
+          data={photos}
+          renderItem={photoRenderItem}
+          keyExtractor={photo => photo.photo_id}
+          horizontal
+          nestedScrollEnabled
+        />
+        <ImageView
+          images={photos.map(photo => {
+            return {
+              uri: photo.url_max,
+            };
+          })}
+          imageIndex={imageIndex}
+          visible={galleryVisible}
+          onRequestClose={() => setGalleryVisible(false)}
+        />
+      </View>
       <View style={styles.section}>
         <Text style={styles.sectionHeader}>Reviews</Text>
         <View style={styles.reviewScoresTotal}>
@@ -71,6 +100,14 @@ export default function HotelScreen({ route }) {
           <Text style={styles.reviewScoresTotalText}>
             Total: {searchData.review_score}
           </Text>
+          <Button
+            onPress={() =>
+              navigation.navigate('HotelReviews', {
+                reviews: reviews,
+              })
+            }
+            title="All Reviews"
+          />
         </View>
         <View style={styles.reviewScores}>
           {review_scores.score_breakdown
@@ -79,14 +116,12 @@ export default function HotelScreen({ route }) {
               item.question
                 .filter(question => question.question !== 'total')
                 .map(question => (
-                  <View style={styles.reviewScore}>
+                  <View style={styles.reviewScore} key={question.question}>
                     <ProgressBar
                       progress={question.score / 10}
                       width={Dimensions.get('window').width / 2.5}
                     />
-                    <Text
-                      key={question.question}
-                      style={styles.reviewScoreText}>
+                    <Text style={styles.reviewScoreText}>
                       {question.localized_question}: {question.score}
                     </Text>
                   </View>
@@ -108,23 +143,31 @@ const styles = StyleSheet.create({
     height: 150,
   },
   headerText: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: '700',
-    marginBottom: 5,
+    marginTop: 7,
+    marginBottom: 7,
+  },
+  headerBottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   section: {
     borderBottomWidth: 1,
     borderColor: '#bababa',
     borderStyle: 'solid',
     marginBottom: 10,
+    marginHorizontal: 15,
+    paddingBottom: 10,
   },
   sectionHeader: {
     fontWeight: '700',
     fontSize: 20,
+    marginBottom: 10,
   },
   description: {
     textAlign: 'justify',
-    marginBottom: 10,
   },
   galleryPhotoContainer: {
     marginHorizontal: 5,
@@ -144,10 +187,11 @@ const styles = StyleSheet.create({
   reviewScores: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   reviewScore: {
     alignItems: 'center',
-    width: Dimensions.get('screen').width / 2,
+    width: Dimensions.get('screen').width / 2 - 20,
   },
   reviewScoreText: {
     marginTop: 2,
@@ -156,10 +200,15 @@ const styles = StyleSheet.create({
   },
   reviewScoresTotal: {
     alignItems: 'center',
-    marginVertical: 10,
+    marginVertical: 5,
   },
   reviewScoresTotalText: {
-    marginTop: 3,
+    marginTop: 5,
     fontWeight: '700',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -7,6 +7,7 @@ const HotelResult = ({ item, navigation }) => {
       style={styles.container}
       onPress={() =>
         navigation.navigate('Hotel', {
+          screen: 'Main',
           name: item.hotel_name,
           searchData: item,
         })
