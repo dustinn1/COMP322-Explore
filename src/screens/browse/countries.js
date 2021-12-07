@@ -13,6 +13,7 @@ export default function Continent({ route, navigation }) {
         onPress={() =>
           navigation.navigate('DetailsSelect', {
             country: item.name,
+            dest_id: item.dest_id,
           })
         }
       />

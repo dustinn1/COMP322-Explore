@@ -5,7 +5,7 @@ import CustomButton from '../../components/CustomButton';
 import CustomInput from '../../components/CustomInput';
 
 export default function DetailsSelect({ route, navigation }) {
-  const { country } = route.params;
+  const { country, dest_id } = route.params;
   const currentDate = new Date();
   const nextDate = new Date();
   nextDate.setDate(nextDate.getDate() + 1);
@@ -51,6 +51,7 @@ export default function DetailsSelect({ route, navigation }) {
         checkOutDate: checkOutDate,
         adultsAmount: adultsAmount,
         roomAmount: roomAmount,
+        dest_id: dest_id,
       });
     }
   }

@@ -265,7 +265,8 @@
     "name": "Canada",
     "continent": "North America",
     "code": "CA",
-    "alpha_3": "CAN"
+    "alpha_3": "CAN",
+    "dest_id": 38
   },
   {
     "name": "Cape Verde",
@@ -301,7 +302,8 @@
     "name": "China",
     "continent": "Asia",
     "code": "CN",
-    "alpha_3": "CHN"
+    "alpha_3": "CHN",
+    "dest_id": 44
   },
   {
     "name": "Christmas Island",
@@ -697,7 +699,8 @@
     "name": "Japan",
     "continent": "Asia",
     "code": "JP",
-    "alpha_3": "JPN"
+    "alpha_3": "JPN",
+    "dest_id": 106
   },
   {
     "name": "Jersey",
@@ -1453,13 +1456,15 @@
     "name": "United Kingdom",
     "continent": "Europe",
     "code": "GB",
-    "alpha_3": "GBR"
+    "alpha_3": "GBR",
+    "dest_id": 222
   },
   {
     "name": "United States",
     "continent": "North America",
     "code": "US",
-    "alpha_3": "USA"
+    "alpha_3": "USA",
+    "dest_id": 244
   },
   {
     "name": "United States Minor Outlying Islands",

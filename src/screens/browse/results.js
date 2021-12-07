@@ -16,8 +16,14 @@ function formatDate(date) {
 }
 
 export default function Results({ route, navigation }) {
-  const { country, checkInDate, checkOutDate, adultsAmount, roomAmount } =
-    route.params;
+  const {
+    country,
+    checkInDate,
+    checkOutDate,
+    adultsAmount,
+    roomAmount,
+    dest_id,
+  } = route.params;
 
   const [loaded, setLoaded] = useState(false);
   const [results, setResults] = useState({});
@@ -28,7 +34,7 @@ export default function Results({ route, navigation }) {
         checkOutDate,
       )}&adults_number=${adultsAmount}&checkin_date=${formatDate(
         checkInDate,
-      )}&room_number=${roomAmount}&filter_by_currency=USD&dest_type=country&locale=en-us&dest_id=13&include_adjacency=true&page_number=0&categories_filter_ids=class%3A%3A5%2Cclass%3A%3A4`,
+      )}&room_number=${roomAmount}&filter_by_currency=USD&dest_type=country&locale=en-us&dest_id=${dest_id}&include_adjacency=true&page_number=0&categories_filter_ids=class%3A%3A5%2Cclass%3A%3A4`,
       {
         method: 'GET',
         headers: {
@@ -45,7 +51,7 @@ export default function Results({ route, navigation }) {
       .catch(err => {
         console.error(err);
       });
-  }, [adultsAmount, checkInDate, checkOutDate, roomAmount]);
+  }, [adultsAmount, checkInDate, checkOutDate, roomAmount, dest_id]);
 
   function ResultsHeader() {
     return (
